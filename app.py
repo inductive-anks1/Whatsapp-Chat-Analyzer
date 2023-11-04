@@ -58,17 +58,15 @@ if upload_file is not None:
             with col1:
                 fig = make_subplots(rows=1, cols=1)
 
-                # Create the bar plot using Plotly Express
+                # Created the bar plot using Plotly Express
                 bar_fig = px.bar(top_users, x=top_users.index, y=top_users.values,
                                  labels={'x': 'Users', 'y': 'Message Count'},
                                  color_discrete_sequence=['#FC0080'])
 
-                # Add the bar plot to the subplot
                 fig.add_trace(bar_fig.data[0])
 
                 fig.update_layout(title_text='Top Most Active Users')
-
-                # Display the subplots using st.plotly_chart
+                
                 st.plotly_chart(fig)
 
         st.markdown("<br>", unsafe_allow_html=True)
@@ -92,11 +90,10 @@ if upload_file is not None:
         bar_fig = px.bar(most_common_df, x='Word', y='Count',
                          labels={'x': 'Word', 'y': 'Word Count'},
                          color_discrete_sequence=['#FC0080'])
-        # Add the bar plot to the subplot
+        # Added the bar plot to the subplot
         fig.add_trace(bar_fig.data[0])
         fig.update_layout(title_text='Top 15 Most Common Words')
 
-        # Display the subplots using st.plotly_chart
         st.plotly_chart(fig)
 
         st.markdown("<br>", unsafe_allow_html=True)
@@ -113,10 +110,10 @@ if upload_file is not None:
                          labels={'x': 'Months', 'y': 'Message Count'},
                          color_discrete_sequence=['#FC0080'])
 
-        # Add the bar plot to the subplot
+        # Added the bar plot to the subplot
         fig.add_trace(bar_fig.data[0])
 
         fig.update_layout(title_text='Most Active Months')
 
-        # Display the subplots using st.plotly_chart
+        # Displayes the subplots using st.plotly_chart
         st.plotly_chart(fig)
