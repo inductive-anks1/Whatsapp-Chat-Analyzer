@@ -58,5 +58,12 @@ def most_common_words(selected_user, df):
                     words.append(word)
 
     return_df = pd.DataFrame(Counter(words).most_common(15))
+    return_df.columns = ['Word', 'Count']
 
     return return_df
+
+
+def most_busy_months(df):
+    top_months = df['Month'].value_counts().head()
+
+    return top_months

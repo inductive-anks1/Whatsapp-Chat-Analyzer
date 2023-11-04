@@ -87,4 +87,36 @@ if upload_file is not None:
 
         most_common_df = helper.most_common_words(selected_user, df)
 
-        st.dataframe(most_common_df)
+        fig = make_subplots(rows=1, cols=1)
+
+        bar_fig = px.bar(most_common_df, x='Word', y='Count',
+                         labels={'x': 'Word', 'y': 'Word Count'},
+                         color_discrete_sequence=['#FC0080'])
+        # Add the bar plot to the subplot
+        fig.add_trace(bar_fig.data[0])
+        fig.update_layout(title_text='Top 15 Most Common Words')
+
+        # Display the subplots using st.plotly_chart
+        st.plotly_chart(fig)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        st.title('Top Most Busy Months')
+
+
+        #Most Busy Months
+        top_months = helper.most_busy_months(df)
+        fig = make_subplots(rows=1, cols=1)
+
+        # Create the bar plot using Plotly Express
+        bar_fig = px.bar(top_months, x=top_months.index, y=top_months.values,
+                         labels={'x': 'Months', 'y': 'Message Count'},
+                         color_discrete_sequence=['#FC0080'])
+
+        # Add the bar plot to the subplot
+        fig.add_trace(bar_fig.data[0])
+
+        fig.update_layout(title_text='Most Active Months')
+
+        # Display the subplots using st.plotly_chart
+        st.plotly_chart(fig)
