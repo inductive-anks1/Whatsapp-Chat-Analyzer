@@ -67,3 +67,28 @@ def most_busy_months(df):
     top_months = df['Month'].value_counts().head()
 
     return top_months
+
+def most_busy_hours(selected_user, df):
+
+    if selected_user != 'Overall':
+        df = df[df['users'] == selected_user]
+
+    timeline = df.groupby(['Hour', 'am/pm']).count()['messages'].reset_index()
+
+    time = []
+
+    for i in range(timeline.shape[0]):
+        time.append(str(timeline['Hour'][i]) + " " + str(timeline['am/pm'][i]))
+
+    timeline['Time'] = time
+
+    custom_order = ['12 am', '1 am', '2 am', '3 am', '4 am', '5 am', '6 am', '7 am', '8 am', '9 am', '10 am', '11 am',
+                    '12 pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm', '8 pm', '9 pm', '10 pm', '11 pm']
+
+    timeline['Time'] = pd.Categorical(timeline['Time'], categories=custom_order, ordered=True)
+
+    timeline = timeline.sort_values(by='Time')
+
+    timeline = timeline.reset_index(drop=True)
+
+    return timeline

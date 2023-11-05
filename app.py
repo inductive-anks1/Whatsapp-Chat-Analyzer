@@ -66,7 +66,7 @@ if upload_file is not None:
                 fig.add_trace(bar_fig.data[0])
 
                 fig.update_layout(title_text='Top Most Active Users')
-                
+
                 st.plotly_chart(fig)
 
         st.markdown("<br>", unsafe_allow_html=True)
@@ -114,6 +114,28 @@ if upload_file is not None:
         fig.add_trace(bar_fig.data[0])
 
         fig.update_layout(title_text='Most Active Months')
+
+        # Displayes the subplots using st.plotly_chart
+        st.plotly_chart(fig)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        st.title('Hourly Message Count')
+
+        #Most busy Hours
+        top_hours = helper.most_busy_hours(selected_user, df)
+
+        fig = make_subplots(rows=1, cols=1)
+
+        # Create the bar plot using Plotly Express
+        bar_fig = px.bar(top_hours, x='Time', y='messages',
+                         labels={'x': 'Hour of the day', 'y': 'Message Count'},
+                         color_discrete_sequence=['#FC0080'])
+
+        # Added the bar plot to the subplot
+        fig.add_trace(bar_fig.data[0])
+
+        fig.update_layout(title_text='Most Active Hours in the Day')
 
         # Displayes the subplots using st.plotly_chart
         st.plotly_chart(fig)
